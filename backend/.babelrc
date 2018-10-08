@@ -1,4 +1,9 @@
 {
-  "presets": ["env", "stage-2"],
-  "plugins": []
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ]
 }
