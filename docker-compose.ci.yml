@@ -5,7 +5,7 @@ services:
     env_file: backend/.env-docker.list
     tty: true
     ports:
-      - 2018:2018
+      - 2000:2000
     links:
       - mongo
   mongo:
