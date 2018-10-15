@@ -1,8 +1,7 @@
-const chai = require('chai');
-const expect = chai.expect;
+import assert from 'assert';
 
 describe('demotest', function() {
     it('demotest', function() {
-        expect(1).to.equal(1);
+        assert.equal(1, 1);
     });
 });
