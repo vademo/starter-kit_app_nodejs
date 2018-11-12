@@ -2,13 +2,11 @@ version: '2'
 services:
   app:
     build: .
-    working_dir: /backend
-    environment:
-      NODE_ENV: test
+    env_file: backend/.env-docker.list
     tty: true
+    ports:
+      - 2000:2000
     links:
       - mongo
   mongo:
     image: mongo:3.2
-    ports:
-      - "27017:27017"
