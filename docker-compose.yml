@@ -16,4 +16,4 @@ services:
   mongo:
     image: mongo:3.2
     ports:
-      - "27020:27017"
+      - "27017:27017"

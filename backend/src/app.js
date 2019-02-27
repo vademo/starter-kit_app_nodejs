@@ -1,40 +1,28 @@
 import async from 'async';
-import express from 'express';
-import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import errorHandler from 'digipolis-error';
+import express from 'express';
 import helmet from 'helmet';
 import responseHandler from 'digipolis-response';
-import errorHandler from 'digipolis-error';
+import dotenv from 'dotenv';
+
 import routes from './routes';
+import initializeDatabase from './helpers/db.helper';
+
+dotenv.config();
 
 let app;
-
-function initializeDatabase(callback) {
-  mongoose.Promise = global.Promise;
-  mongoose.connect(process.env.MONGO_CONNECTIONSTRING, { useMongoClient: true });
-  mongoose.connection.once('open', (err) => {
-    if (err) {
-      console.log('mongo error', err);
-      return callback(err);
-    }
-    return callback();
-  });
-}
-
 function initializeExpress(callback) {
   app = express();
-  app.set('port', process.env.PORT);
   app.use(helmet());
   app.use(bodyParser.json({ limit: '4096kb' }));
-
   app.use(responseHandler());
-
   app.use(routes);
-
   app.use((err, req, res, next) => {
     console.log(err);
     return next(err);
   });
+
   app.use(errorHandler.middleware());
 
   // Status handler
@@ -42,16 +30,16 @@ function initializeExpress(callback) {
 }
 
 function startListening(callback) {
-  app.listen(app.get('port'), () => {
-    console.log(`Express server listening on port ${app.get('port')}`);
+  const server = app.listen(process.env.PORT, () => {
+    console.log(`Express server listening on port ${server.address().port}`);
     return callback();
   });
 }
 
 function start(cb) {
   async.series([
-    initializeDatabase,
     initializeExpress,
+    initializeDatabase,
     startListening,
   ], (err) => {
     if (err) {
@@ -59,8 +47,9 @@ function start(cb) {
       return process.exit(1);
     }
     if (cb && typeof cb === 'function') {
-      return cb(err);
+      return cb(app, err);
     }
+    return cb(err);
   });
 }
 
@@ -72,3 +61,4 @@ export default {
   start,
   stop,
 };
+
