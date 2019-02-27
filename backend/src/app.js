@@ -1,15 +1,19 @@
 import async from 'async';
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import express from 'express';
 import helmet from 'helmet';
 import responseHandler from 'digipolis-response';
-import dotenv from 'dotenv';
 
 import routes from './routes';
 import errorHandler from './middlewares/error.middleware';
 import initializeDatabase from './helpers/db.helper';
 
-dotenv.config();
+const CUSTOM_CONFIG_ENVS = ['test', 'development', 'build'];
+
+dotenv.config({
+  path: (CUSTOM_CONFIG_ENVS.includes(process.env.NODE_ENV) ? `.env.${process.env.NODE_ENV}` : '.env'),
+});
 
 let app;
 function initializeExpress(callback) {
