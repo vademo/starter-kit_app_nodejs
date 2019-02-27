@@ -9,7 +9,7 @@ node_js:
 sudo: false
 
 env:
-  - MONGO_CONNECTIONSTRING="mongodb://mongodb:27017/starterkit"
+  - MONGO_CONNECTIONSTRING="mongodb://localhost:27017/starterkit"
 
 script:
   - npm install --prefix ./backend
