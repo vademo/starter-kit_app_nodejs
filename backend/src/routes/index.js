@@ -1,17 +1,14 @@
 import path from 'path';
-import express from 'express';
-import {} from 'dotenv/config';
-import example from './example';
-import status from './status';
+import { Router, static as expressStatic } from 'express';
+import apiRouter from './api.router';
 
 const FRONTEND_BUILD_PATH = path.join(__dirname, '../../../frontend/build');
 
-const router = express.Router();
+const router = Router();
 
-router.use('/api/examples', example);
-router.use('/api/status', status);
+router.use('/api', apiRouter);
 
-router.use(express.static(FRONTEND_BUILD_PATH));
+router.use(expressStatic(FRONTEND_BUILD_PATH));
 
 router.get('*', (req, res) => {
   res.sendFile(path.join(FRONTEND_BUILD_PATH, 'index.html'));

@@ -1,10 +1,10 @@
-import express from 'express';
+import { Router } from 'express';
 import {
   getExample,
   getExamples,
 } from '../controllers/examples';
 
-const router = new express.Router();
+const router = new Router();
 
 router.get('/:exampleId', getExample);
 router.get('/', getExamples);

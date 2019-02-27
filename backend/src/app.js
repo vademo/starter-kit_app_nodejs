@@ -1,12 +1,12 @@
 import async from 'async';
 import bodyParser from 'body-parser';
-// import errorHandler from 'digipolis-error';
 import express from 'express';
 import helmet from 'helmet';
 import responseHandler from 'digipolis-response';
 import dotenv from 'dotenv';
 
 import routes from './routes';
+import errorHandler from './middlewares/error.middleware';
 import initializeDatabase from './helpers/db.helper';
 
 dotenv.config();
@@ -23,7 +23,7 @@ function initializeExpress(callback) {
     return next(err);
   });
 
-  // app.use(errorHandler.middleware());
+  app.use(errorHandler());
 
   // Status handler
   return callback();

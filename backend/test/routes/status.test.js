@@ -20,4 +20,13 @@ describe('Status route test:', () => {
         if (err) throw err;
       });
   });
+  it('GET: /api/fake', () => {
+    request(server)
+      .get('/api/fake')
+      .expect('Content-Type', /json/)
+      .expect(404)
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
 });
