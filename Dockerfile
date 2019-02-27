@@ -1,4 +1,4 @@
-FROM node:8.11.2 as builder
+FROM node:10.15.0-alpine
 
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
@@ -19,7 +19,7 @@ COPY frontend ./
 RUN mkdir -p /app/backend
 WORKDIR /app/backend
 
-COPY backend/package.json backend/.npmrc ./
+COPY backend/package.json ./
 RUN npm install
 COPY backend ./
 RUN npm run build
