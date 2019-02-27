@@ -1,6 +1,6 @@
 import async from 'async';
 import bodyParser from 'body-parser';
-import errorHandler from 'digipolis-error';
+// import errorHandler from 'digipolis-error';
 import express from 'express';
 import helmet from 'helmet';
 import responseHandler from 'digipolis-response';
@@ -23,7 +23,7 @@ function initializeExpress(callback) {
     return next(err);
   });
 
-  app.use(errorHandler.middleware());
+  // app.use(errorHandler.middleware());
 
   // Status handler
   return callback();
