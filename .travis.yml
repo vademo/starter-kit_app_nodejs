@@ -12,9 +12,9 @@ env:
   - MONGO_CONNECTIONSTRING="mongodb://mongodb:27017/starterkit"
 
 script:
-  - npm install
-  - npm run lint
-  - npm run test
+  - npm install --prefix ./backend
+  - npm run lint --prefix ./backend
+  - npm run test --prefix ./backend
 
 after_script:
   - "npm install coveralls"
