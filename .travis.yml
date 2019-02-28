@@ -14,8 +14,8 @@ env:
 script:
   - npm install --prefix ./backend
   - npm run lint --prefix ./backend
-  - npm run test --prefix ./backend
+  - npm run test:coverage --prefix ./backend
 
 after_script:
   - "npm install coveralls"
-  - "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  - "cat ./backend/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
