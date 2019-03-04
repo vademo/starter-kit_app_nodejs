@@ -1,7 +1,6 @@
 import app from './app';
 
-
-app.start((err) => {
+app.start((application, err) => {
   if (err) {
     console.error(`Error=${err}`);
   }

@@ -1,23 +1,27 @@
 import async from 'async';
-import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import express from 'express';
 import helmet from 'helmet';
 import responseHandler from 'digipolis-response';
+import session from 'express-session';
 
 import routes from './routes';
 import errorHandler from './middlewares/error.middleware';
 import initializeDatabase from './helpers/db.helper';
+import setEnviroment from './helpers/env.helper';
 
-const CUSTOM_CONFIG_ENVS = ['test', 'development', 'build'];
-
-dotenv.config({
-  path: (CUSTOM_CONFIG_ENVS.includes(process.env.NODE_ENV) ? `.env.${process.env.NODE_ENV}` : '.env'),
-});
 
 let app;
+const sessionConfig = {
+  name: 'authsessionid',
+  secret: 'fmLYLzKkxThzCyECV3DzepvmNK',
+  resave: false,
+  saveUninitialized: true,
+};
+
 function initializeExpress(callback) {
   app = express();
+  app.use(session(sessionConfig));
   app.use(helmet());
   app.use(bodyParser.json({ limit: '4096kb' }));
   app.use(responseHandler());
@@ -41,6 +45,7 @@ function startListening(callback) {
 }
 
 function start(cb) {
+  setEnviroment();
   async.series([
     initializeExpress,
     initializeDatabase,
@@ -53,7 +58,7 @@ function start(cb) {
     if (cb && typeof cb === 'function') {
       return cb(app, err);
     }
-    return cb(err);
+    return cb(app);
   });
 }
 
