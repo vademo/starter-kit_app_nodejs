@@ -1,4 +1,4 @@
-import digipolisLogin from 'digipolis-login';
+import digipolisLogin from '@digipolis/auth';
 import setEnviroment from '../helpers/env.helper';
 
 function getAuthConfig() {
@@ -19,7 +19,7 @@ function getAuthConfig() {
         url: process.env.AUTHENTICATION_SERVICEPROVIDERS_MPROFIEL_URL,
         identifier: 'astad.mprofiel.v1',
         fetchPermissions: false,
-        applicationName: 'chatbots_app_nodejs',
+        applicationName: 'digipolis_boilerplate_app',
         tokenUrl: process.env.AUTHENTICATION_SERVICEPROVIDERS_MPROFIEL_TOKENURL,
       },
     },
