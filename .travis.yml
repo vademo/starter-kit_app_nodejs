@@ -1,16 +1,21 @@
+language: node_js
+
 services: mongodb
 
 node_js:
-  - "node"
   - "6"
   - "8"
   - "10"
+  - "11"
 
 sudo: false
 
 env:
   - MONGO_CONNECTIONSTRING="mongodb://localhost:27017/starterkit"
 
+cache:
+    directories:
+          - "node_modules"
 script:
   - npm install --prefix ./backend
   - npm run lint --prefix ./backend
