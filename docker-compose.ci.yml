@@ -4,6 +4,7 @@ services:
     build: .
     env_file: backend/.env-docker.list
     tty: true
+    command: "npm run test"
     ports:
       - 2000:2000
     links:
