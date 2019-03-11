@@ -56,9 +56,9 @@ function start(cb) {
       return process.exit(1);
     }
     if (cb && typeof cb === 'function') {
-      return cb(app, err);
+      return cb(err, app);
     }
-    return cb(app);
+    return cb(null, app);
   });
 }
 
