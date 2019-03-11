@@ -6,7 +6,7 @@ import app from '../../src/app';
 describe('Status route test:', () => {
   let server;
   before((done) => {
-    app.start((application) => {
+    app.start((err, application) => {
       server = application;
       done();
     });

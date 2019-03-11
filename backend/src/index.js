@@ -5,4 +5,4 @@ app.start((err, application) => {
     console.error(`Error=${err}`);
   }
   console.info('app bootstrap finished');
-});
+});, err
