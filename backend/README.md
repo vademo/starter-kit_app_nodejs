@@ -25,7 +25,7 @@ AUTHENTICATION_OAUTHHOST=https://api-oauth2-o.antwerpen.be
 AUTHENTICATION_APIHOST=https://api-gw-o.antwerpen.be
 AUTHENTICATION_CLIENTID=<your-client-id>
 AUTHENTICATION_CLIENTSECRET=<your-client-secret>
-AUTHENTICATION_SERVICEPROVIDERS_MPROFIEL_URL=https://api-gw-o.antwerpen.be/astad/mprofiel/v1/v1/me
+AUTHENTICATION_SERVICEPROVIDERS_MPROFIEL_URL=https://api-gw-o.antwerpen.be/astad/mprofiel/v1/me
 AUTHENTICATION_SERVICEPROVIDERS_MPROFIEL_TOKENURL=https://api-gw-o.antwerpen.be/astad/mprofiel/v1/oauth2/token
 
 ```

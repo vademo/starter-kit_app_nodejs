@@ -14,7 +14,7 @@ import setEnviroment from './helpers/env.helper';
 let app;
 const sessionConfig = {
   name: 'authsessionid',
-  secret: 'fmLYLzKkxThzCyECV3DzepvmNK',
+  secret: '<set_your_secret_here>',
   resave: false,
   saveUninitialized: true,
 };
