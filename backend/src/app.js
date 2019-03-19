@@ -8,8 +8,6 @@ import session from 'express-session';
 import routes from './routes';
 import errorHandler from './middlewares/error.middleware';
 import initializeDatabase from './helpers/db.helper';
-import setEnviroment from './helpers/env.helper';
-
 
 let app;
 const sessionConfig = {
@@ -45,7 +43,6 @@ function startListening(callback) {
 }
 
 function start(cb) {
-  setEnviroment();
   async.series([
     initializeExpress,
     initializeDatabase,
@@ -53,12 +50,11 @@ function start(cb) {
   ], (err) => {
     if (err) {
       console.error(`Error occured ${err}`);
-      return process.exit(1);
+      process.exit(1);
     }
     if (cb && typeof cb === 'function') {
-      return cb(err, app);
+      cb(err, app);
     }
-    return cb(null, app);
   });
 }
 

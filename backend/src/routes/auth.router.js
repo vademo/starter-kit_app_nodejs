@@ -1,9 +1,6 @@
 import digipolisLogin from '@digipolis/auth';
-import setEnviroment from '../helpers/env.helper';
 
 function getAuthConfig() {
-  // Load env before init of auth routes
-  setEnviroment();
   return {
     oauthHost: process.env.AUTHENTICATION_OAUTHHOST,
     apiHost: process.env.AUTHENTICATION_APIHOST,

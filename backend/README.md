@@ -6,7 +6,7 @@ Set configuration in .env (example in Configuration)
 By default the login routes are mounted on `/auth`:
 
  - **Login mprofiel:** 			`/auth/login/mprofiel`
- - **isloggedin mprofiel:**  	`/auth/login/mprofiel`
+ - **isloggedin mprofiel:**  	`/auth/isloggedin`
  - **logout mprofiel:** 		`/logout/callback/{service}`
 
 ## Testing

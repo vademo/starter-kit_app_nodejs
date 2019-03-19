@@ -7,40 +7,22 @@
     "test": "test"
   },
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node",
-    "build": "npx babel src -d dist",
+    "start": "env-cmd ./enviroment/local.env nodemon src/index.js --exec babel-node",
+    "build": "babel src -d dist",
     "serve": "node dist/index.js",
     "lint": "eslint **/*.js",
-    "test": "cross-env NODE_ENV=test nyc mocha --recursive  --reporter=spec --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit",
-    "test:coverage": "./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/nyc  --reporter=lcovonly --reporter=text ./node_modules/.bin/mocha --recursive --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit",
-    "test-build": "cross-env NODE_ENV=test nyc mocha --recursive --reporter=mocha-bamboo-reporter --timeout=15000 --slow 2 --require @babel/register  --require @babel/polyfill --exit"
+    "test": "env-cmd ./enviroment/test.env nyc mocha --recursive  --reporter=spec --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit",
+    "test:coverage": "env-cmd ./enviroment/test.env  ./node_modules/.bin/nyc  --reporter=lcovonly --reporter=text ./node_modules/.bin/mocha --recursive --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit",
+    "test-build": "env-cmd ./enviroment/test.env nyc mocha --recursive --reporter=mocha-bamboo-reporter --timeout=15000 --slow 2 --require @babel/register  --require @babel/polyfill --exit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/node": "^7.2.2",
-    "@babel/polyfill": "~7.0.0",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/register": "~7.0.0",
-    "cross-env": "~5.2.0",
-    "eslint": "~4.19.1",
-    "eslint-config-airbnb-base": "~12.1.0",
-    "eslint-plugin-import": "~2.11.0",
-    "istanbul": "^0.4.5",
-    "mocha": "~5.1.1",
-    "nodemon": "^1.18.10",
-    "nyc": "^13.3.0",
-    "supertest": "^3.0.0"
-  },
   "dependencies": {
     "@digipolis/auth": "^1.0.0",
     "async": "~2.6.1",
     "body-parser": "~1.18.2",
     "digipolis-response": "~1.0.1",
-    "dotenv": "^5.0.1",
     "express": "~4.16.3",
     "express-session": "^1.15.6",
     "helmet": "~3.12.0",
@@ -49,5 +31,22 @@
     "lodash": "^4.17.11",
     "mongoose": "~4.13.11",
     "uuid": "~3.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/polyfill": "~7.0.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "~7.0.0",
+    "env-cmd": "^8.0.2",
+    "eslint": "~4.19.1",
+    "eslint-config-airbnb-base": "~12.1.0",
+    "eslint-plugin-import": "~2.11.0",
+    "istanbul": "^0.4.5",
+    "mocha": "~5.1.1",
+    "nodemon": "^1.18.10",
+    "nyc": "^13.3.0",
+    "supertest": "^3.0.0"
   }
 }
