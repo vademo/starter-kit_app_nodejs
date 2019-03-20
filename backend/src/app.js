@@ -1,23 +1,25 @@
 import async from 'async';
-import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import express from 'express';
 import helmet from 'helmet';
 import responseHandler from 'digipolis-response';
+import session from 'express-session';
 
 import routes from './routes';
 import errorHandler from './middlewares/error.middleware';
 import initializeDatabase from './helpers/db.helper';
 
-const CUSTOM_CONFIG_ENVS = ['test', 'development', 'build'];
-
-dotenv.config({
-  path: (CUSTOM_CONFIG_ENVS.includes(process.env.NODE_ENV) ? `.env.${process.env.NODE_ENV}` : '.env'),
-});
-
 let app;
+const sessionConfig = {
+  name: 'authsessionid',
+  secret: '<set_your_secret_here>',
+  resave: false,
+  saveUninitialized: true,
+};
+
 function initializeExpress(callback) {
   app = express();
+  app.use(session(sessionConfig));
   app.use(helmet());
   app.use(bodyParser.json({ limit: '4096kb' }));
   app.use(responseHandler());
@@ -48,12 +50,11 @@ function start(cb) {
   ], (err) => {
     if (err) {
       console.error(`Error occured ${err}`);
-      return process.exit(1);
+      process.exit(1);
     }
     if (cb && typeof cb === 'function') {
-      return cb(app, err);
+      cb(err, app);
     }
-    return cb(err);
   });
 }
 
