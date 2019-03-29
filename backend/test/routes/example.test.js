@@ -47,7 +47,7 @@ describe('example routes', () => {
     after((done) => {
       Example.findById(id).remove().exec(done);
     });
-    it(`GET: ${routeExamples}/:id invalid id`, () => request(server)
+    it(`GET: ${routeExamples}/:id valid id`, () => request(server)
       .get(`${routeExamples}/${id}`)
       .expect('Content-Type', /json/)
       .expect(200)
