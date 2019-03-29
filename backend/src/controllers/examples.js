@@ -8,9 +8,9 @@ export function getExample(req, res, next) {
   getExampleById(req.params.exampleId)
     .then((example) => {
       if (!example) {
-        next(Errors.notFound({ message: `example with id ${req.params.exampleId} not found` }));
+        return next(Errors.notFound({ message: `example with id ${req.params.exampleId} not found` }));
       }
-      res.json(example);
+      return res.json(example);
     })
     .catch(next);
 }
