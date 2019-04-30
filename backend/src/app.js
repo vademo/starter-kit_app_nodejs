@@ -10,6 +10,7 @@ import errorHandler from './middlewares/error.middleware';
 import initializeDatabase from './helpers/db.helper';
 
 let app;
+let server;
 const sessionConfig = {
   name: 'authsessionid',
   secret: '<set_your_secret_here>',
@@ -36,7 +37,7 @@ function initializeExpress(callback) {
 }
 
 function startListening(callback) {
-  const server = app.listen(process.env.PORT, () => {
+  server = app.listen(process.env.PORT, () => {
     console.log(`Express server listening on port ${server.address().port}`);
     return callback();
   });
@@ -59,7 +60,7 @@ function start(cb) {
 }
 
 function stop() {
-  app.close();
+  server.close();
 }
 
 export default {
