@@ -13,7 +13,7 @@
 | **Start database**    | `docker-compose up mongo` | Start database for local run                                                                                      |
 | **Build**             | `npm build`               | We're using babel to compile the ES Modules Syntax to commonjs. ES Modules are still experimental in the node 11. |
 | **Run build**         | `npm run serve`           |                                                                                                                   |
-| **Run app in docker** | `docker-compose up`       | Run app in dockerized enviroment                                                                                  |
+| **Run app in docker** | `docker-compose up`       | Run app in dockerized environment                                                                                  |
 
 ### Auth
 Set configuration in .env (example in Configuration)
@@ -28,7 +28,7 @@ By default the login routes are mounted on `/auth`:
 |                             | cmd                                          | description                             |
 | --------------------------- | -------------------------------------------- | ---------------------------------------- |
 | **Run all tests**           | `npm test`                                   | run the unit test locally.               |
-| **Run all tests in docker** | `docker-compose -f docker-compose.ci.yml up` | Run all tests in a dockerized enviroment |
+| **Run all tests in docker** | `docker-compose -f docker-compose.ci.yml up` | Run all tests in a dockerized environment |
 | **Generate coverage**       | `npm run test:coverage`                      | Run all test & generate coverage         |
 | **test-build (bamboo)**     | `npm run test-build`                         | test command for Bamboo                  |
 ## Configuration

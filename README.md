@@ -16,7 +16,7 @@ A boilerplate project for Digipolis, created to keep a consistent folder stuctur
 ### Run:
 |                       | cmd                 |  description                     |  
 | --------------------- | ------------------- | -------------------------------- |
-| **Run app in docker** | `docker-compose up` | Run app in dockerized enviroment |
+| **Run app in docker** | `docker-compose up` | Run app in dockerized environment |
 
 
 ### Testing:
