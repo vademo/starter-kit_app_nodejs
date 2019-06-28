@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import async from 'async';
 import bodyParser from 'body-parser';
 import express from 'express';
