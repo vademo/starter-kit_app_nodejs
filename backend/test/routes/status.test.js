@@ -11,6 +11,10 @@ describe('Status route test:', () => {
       done();
     });
   });
+  after((done) => {
+    app.stop();
+    done();
+  });
   it('GET: /api/status', () => {
     request(server)
       .get('/api/status')

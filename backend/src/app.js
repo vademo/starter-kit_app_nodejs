@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import async from 'async';
 import bodyParser from 'body-parser';
 import express from 'express';
@@ -7,7 +8,7 @@ import session from 'express-session';
 
 import routes from './routes';
 import errorHandler from './middlewares/error.middleware';
-import initializeDatabase from './helpers/db.helper';
+import initializeDatabase, { closeDatabaseConnection } from './helpers/db.helper';
 
 let app;
 let server;
@@ -60,6 +61,7 @@ function start(cb) {
 }
 
 function stop() {
+  closeDatabaseConnection();
   server.close();
 }
 

@@ -12,4 +12,8 @@ function initializeDatabase(callback) {
   });
 }
 
+export function closeDatabaseConnection() {
+  mongoose.connection.close();
+}
+
 export default initializeDatabase;
