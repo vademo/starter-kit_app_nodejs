@@ -13,6 +13,10 @@ describe('example routes', () => {
       done();
     });
   });
+  after((done) => {
+    app.stop();
+    done();
+  });
   describe('Without data', () => {
     it(`GET: ${routeExamples}`, () => {
       request(server)
