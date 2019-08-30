@@ -1,4 +1,3 @@
-import async from 'async';
 import bodyParser from 'body-parser';
 import express from 'express';
 import helmet from 'helmet';
@@ -18,7 +17,7 @@ const sessionConfig = {
   saveUninitialized: true,
 };
 
-function initializeExpress(callback) {
+function initializeExpress() {
   app = express();
   app.use(session(sessionConfig));
   app.use(helmet());
@@ -29,34 +28,29 @@ function initializeExpress(callback) {
     console.log(err);
     return next(err);
   });
-
+  app.enable('trust proxy');
   app.use(errorHandler());
-
-  // Status handler
-  return callback();
 }
 
-function startListening(callback) {
-  server = app.listen(process.env.PORT, () => {
-    console.log(`Express server listening on port ${server.address().port}`);
-    return callback();
+function startListening() {
+  return new Promise((resolve) => {
+    server = app.listen(process.env.PORT, () => {
+      console.log(`Express server listening on port ${server.address().port}`);
+      resolve();
+    });
   });
 }
 
-function start(cb) {
-  async.series([
-    initializeExpress,
-    initializeDatabase,
-    startListening,
-  ], (err) => {
-    if (err) {
-      console.error(`Error occured ${err}`);
-      process.exit(1);
-    }
-    if (cb && typeof cb === 'function') {
-      cb(err, app);
-    }
-  });
+async function start() {
+  try {
+    initializeExpress();
+    await initializeDatabase();
+    await startListening();
+    return app;
+  } catch (err) {
+    console.error(`Error occured ${err}`);
+    return process.exit(1);
+  }
 }
 
 function stop() {

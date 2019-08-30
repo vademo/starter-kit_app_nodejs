@@ -1,12 +1,10 @@
 import request from 'supertest';
-
 import app from '../../src/app';
-
 
 describe('Status route test:', () => {
   let server;
   before((done) => {
-    app.start((err, application) => {
+    app.start().then((application) => {
       server = application;
       done();
     });
