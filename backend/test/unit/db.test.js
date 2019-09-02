@@ -12,7 +12,7 @@ describe('DB', () => {
     sandbox.restore();
   });
   it('DB connection fail should return error', (done) => {
-    sandbox.stub(mongoose.connection, 'once').yields(new Error('db error'));
+    sandbox.stub(mongoose, 'connect').rejects(new Error('db error'));
     initializeDatabase()
       .then(() => done('shoudn`t resolve'))
       .catch(() => {

@@ -36,7 +36,7 @@ function startListening() {
   return new Promise((resolve) => {
     server = app.listen(process.env.PORT, () => {
       console.log(`Express server listening on port ${server.address().port}`);
-      resolve();
+      return resolve();
     });
   });
 }
