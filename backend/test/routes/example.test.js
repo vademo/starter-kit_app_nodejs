@@ -8,7 +8,7 @@ const routeExamples = '/api/examples';
 describe('example routes', () => {
   let server;
   before((done) => {
-    app.start((err, application) => {
+    app.start().then((application) => {
       server = application;
       done();
     });
