@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { expect } from 'chai';
 import app from '../../src/app';
 
 describe('Status route test:', () => {
@@ -22,13 +23,18 @@ describe('Status route test:', () => {
         if (err) throw err;
       });
   });
-  it('GET: /api/fake', () => {
-    request(server)
-      .get('/api/fake')
-      .expect('Content-Type', /json/)
-      .expect(404)
-      .end((err) => {
-        if (err) throw err;
-      });
-  });
+  it('GET: /api/fake', () => request(server)
+    .get('/api/fake')
+    .expect('Content-Type', /json/)
+    .expect(404)
+    .then(({ body }) => {
+      expect(body.type).to.deep.equal('about:blank');
+      expect(body.title).to.deep.equal('Not Found');
+      expect(body.detail).to.deep.equal('This route doesn\'t exists on the api');
+      expect(body.status).to.deep.equal(404);
+      expect(body.code).to.deep.equal(404);
+    })
+    .catch((err) => {
+      throw err;
+    }));
 });
