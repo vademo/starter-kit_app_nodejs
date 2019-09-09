@@ -9,7 +9,7 @@ A boilerplate project for Digipolis, created to keep a consistent folder stuctur
 
 ## How to use
 
-###Backend:
+### Backend:
 
  **[Backend documentation](backend/README.md)**
 
