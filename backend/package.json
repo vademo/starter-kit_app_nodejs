@@ -11,7 +11,7 @@
     "build": "babel src -d dist",
     "serve": "node dist/index.js",
     "lint": "eslint **/*.js",
-    "test": "env-cmd ./environment/test.env --no-override nyc mocha --recursive  --reporter=spec --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit",
+    "test": "env-cmd ./environment/test.env --no-override nyc mocha --recursive  --reporter=spec --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit && npm run lint",
     "test:coverage": "env-cmd ./environment/test.env  ./node_modules/.bin/nyc  --reporter=lcovonly --reporter=text ./node_modules/.bin/mocha --recursive --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --exit",
     "test-build": "env-cmd ./environment/test.env nyc mocha --recursive --reporter=mocha-bamboo-reporter --timeout=15000 --slow 2 --require @babel/register  --require @babel/polyfill --exit"
   },

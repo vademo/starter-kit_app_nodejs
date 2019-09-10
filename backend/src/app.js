@@ -25,16 +25,18 @@ function initializeExpress() {
   app.use(responseHandler());
   app.use(routes);
   app.use((err, req, res, next) => {
+    // eslint-disable-next-line no-console
     console.log(err);
     return next(err);
   });
   app.enable('trust proxy');
-  app.use(errorHandler());
+  app.use(errorHandler);
 }
 
 function startListening() {
   return new Promise((resolve) => {
     server = app.listen(process.env.PORT, () => {
+      // eslint-disable-next-line no-console
       console.log(`Express server listening on port ${server.address().port}`);
       return resolve();
     });
@@ -48,6 +50,7 @@ async function start() {
     await startListening();
     return app;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(`Error occured ${err}`);
     return process.exit(1);
   }

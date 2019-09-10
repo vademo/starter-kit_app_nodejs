@@ -32,7 +32,7 @@ describe('example routes', () => {
       .expect('Content-Type', /json/)
       .expect(404)
       .then(({ body }) => {
-        expect(body.detail).to.deep.equal('example with id 41224d776a326fb40f000001 not found');
+        expect(body.message).to.deep.equal('example with id 41224d776a326fb40f000001 not found');
       }));
     it(`GET: ${routeExamples}/:exampleId invalid id`, () => request(server)
       .get(`${routeExamples}/fake`)
