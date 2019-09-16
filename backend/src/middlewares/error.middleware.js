@@ -1,63 +1,49 @@
-import uuid from 'uuid';
+import errors from '../errors';
 
-function logError(logger, identifier, err) {
-  logger.error(`${identifier} stack:`, err.stack);
-  logger.error(`${identifier} error: `, err);
-}
-
-function getErrorStatus(err) {
-  if (err.status) {
-    return err.status;
-  }
-
-  switch (err.name) {
-    case 'ValidationError':
-    case 'CastError':
-    case 'BadRequestError':
-      return 400;
-    case 'NotFoundError':
-      return 404;
-    default:
-      return 500;
-  }
-}
-
-function formatErrorOutput(errorProperties) {
-  const status = getErrorStatus(errorProperties);
-  return {
-    type: errorProperties.type || 'about:blank',
-    title: errorProperties.title || errorProperties.name,
-    detail: errorProperties.message,
-    url: errorProperties.originalUrl,
-    status,
-    identifier: errorProperties.identifier,
-    code: errorProperties.code || status,
-  };
-}
-
-function errorHandler(options) {
-  const errorHandlerOptions = options || {};
-  const logger = errorHandlerOptions.logger || false;
-
-  return function errorMiddleware(err, req, res, next) {
-    if (!err) {
-      return next();
+// eslint-disable-next-line no-unused-vars
+function errorHandler(err, req, res, next) {
+  let returnError = err;
+  let meta;
+  if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
+    meta = {
+      stack: err.stack,
+    };
+    if (err.message === 'validation error') {
+      meta = err.errors;
     }
-
-    const errorProperties = Object.assign({}, err);
-    errorProperties.url = req.originalUrl;
-    errorProperties.identifier = err.identifier || uuid.v4();
-
-    if (logger) {
-      logError(logger, errorProperties);
-    }
-
-    const outPutError = formatErrorOutput(errorProperties);
-
-    res.setHeader('Content-Type', 'application/problem+json');
-
-    return res.status(outPutError.status).json(outPutError);
-  };
+  }
+  if (err.name === 'BadRequestError' || err.name === 'CastError') {
+    returnError = errors.badRequest({
+      identifier: req.id,
+      type: req.originalUrl,
+      meta,
+    });
+  }
+  if (err.message === 'validation error') {
+    returnError = errors.badRequest({
+      title: err.field ? err.field : 'Validation Error',
+      identifier: req.id,
+      detail: err.errors || '',
+      type: req.originalUrl,
+      meta,
+    });
+  }
+  if (returnError.status) {
+    return res.status(returnError.status).json({
+      ...returnError,
+      identifier: req.id,
+      code: err.status || -1,
+      type: req.originalUrl,
+    });
+  }
+  return res.status(500).json(errors.internalServerError({
+    title: 'Something went wrong',
+    type: req.originalUrl,
+    detail: returnError.message,
+    identifier: req.id,
+    code: -1,
+    meta,
+  }));
 }
 
 export default errorHandler;

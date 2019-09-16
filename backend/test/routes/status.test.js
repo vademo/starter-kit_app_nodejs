@@ -28,9 +28,9 @@ describe('Status route test:', () => {
     .expect('Content-Type', /json/)
     .expect(404)
     .then(({ body }) => {
-      expect(body.type).to.deep.equal('about:blank');
+      expect(body.type).to.deep.equal('/api/fake');
       expect(body.title).to.deep.equal('Not Found');
-      expect(body.detail).to.deep.equal('This route doesn\'t exists on the api');
+      expect(body.message).to.deep.equal('This route doesn\'t exists on the api');
       expect(body.status).to.deep.equal(404);
       expect(body.code).to.deep.equal(404);
     })
