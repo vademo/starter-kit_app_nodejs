@@ -3,8 +3,7 @@ import errors from '../errors';
 // eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   let returnError = err;
-  // eslint-disable-next-line no-undef-init
-  let meta = undefined;
+  let meta;
   if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
     meta = {
       stack: err.stack,
