@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-09-17
+ 
+ - Remove the need to initialize the error middleware
+ - Rewrite error middleware with tests 
+ - Add eslint to default test & fix warnings
+ - Add test for fallback route * to cover 100%
+ - minor bufixes
+
 
 ## [1.0.1] - 2019-09-02
 
@@ -23,7 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 First tagged release.
 
 
-[Unreleased]: https://github.com/digipolisantwerp/starter-kit_app_nodejs/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/digipolisantwerp/starter-kit_app_nodejs/compare/v1.1.0...HEAD
+
+[1.1.0]: https://github.com/digipolisantwerp/starter-kit_app_nodejs/compare/v1.0.1
 
 [1.0.1]: https://github.com/digipolisantwerp/starter-kit_app_nodejs/compare/v1.0.1
 
