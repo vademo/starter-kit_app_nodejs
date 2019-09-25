@@ -11,7 +11,7 @@ apiRouter.use('/status', status);
 
 
 apiRouter.get('*', (req, res, next) => {
-  next(Errors.notFound({ message: 'This route doesn\'t exists on the api' }));
+  next(Errors.notFound({ message: 'This route doesn\'t exist on the api' }));
 });
 
 export default apiRouter;
