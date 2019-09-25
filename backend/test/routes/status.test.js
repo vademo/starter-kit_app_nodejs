@@ -30,7 +30,7 @@ describe('Status route test:', () => {
     .then(({ body }) => {
       expect(body.type).to.deep.equal('/api/fake');
       expect(body.title).to.deep.equal('Not Found');
-      expect(body.message).to.deep.equal('This route doesn\'t exists on the api');
+      expect(body.message).to.deep.equal('This route doesn\'t exist on the api');
       expect(body.status).to.deep.equal(404);
       expect(body.code).to.deep.equal(404);
     })
